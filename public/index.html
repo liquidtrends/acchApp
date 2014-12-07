@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html lang="en" ng-app="acch">
+  <head>
+   <meta charset="utf-8">
+   <meta http-equiv="X-UA-Compatible" content="IE=edge">
+   <meta name="viewport" content="width=device-width, initial-scale=1">
+   <meta name="description" content="">
+   <meta name="author" content="">
+
+   <title>ACCH</title>
+   <link href="http://maxcdn.bootstrapcdn.com/font-awesome/4.2.0/css/font-awesome.min.css" rel="stylesheet">
+   <link href='http://fonts.googleapis.com/css?family=Raleway:400,200' rel='stylesheet' type='text/css'>
+   <link href="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.1/css/bootstrap.min.css" rel="stylesheet">
+   <link href="stylesheets/style.css" rel="stylesheet">
+   <link href="stylesheets/animate.css" rel="stylesheet">
+  </head>
+
+  <body>
+
+    <!-- Fixed navbar -->
+   <nav class="navbar navbar-default" role="navigation">
+   <div class="container">
+     <div class="navbar-header">
+       <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#navbar" aria-expanded="false" aria-controls="navbar">
+         <span class="sr-only">Toggle navigation</span>
+         <span class="icon-bar"></span>
+         <span class="icon-bar"></span>
+         <span class="icon-bar"></span>
+       </button>
+       <a class="navbar-brand" href="#">ACCH</a>
+     </div>
+     <div id="navbar" class="collapse navbar-collapse">
+       <ul class="nav navbar-nav">
+         <li class="active"><a href="#">Home</a></li>
+         <li><a href="#about">Should I get tested?</a></li>
+         <li><a href="#contact">What are my options?</a></li>
+         <li><a href="#contact">Where can I get tested?</a></li>
+         <li><a href="#contact">What to expect</a></li>
+         <li><a href="#contact">Get the facts</a></li>
+       </ul>
+     </div><!--/.nav-collapse -->
+   </div>
+   </nav>
+
+   <div ng-view></div>
+
+    <footer class="footer">
+      <div class="container">
+        <button class="btn btn-default"><i class="fa fa-home"></i></button>
+        <button class="btn btn-default pull-right"><i class="fa fa-info-circle"></i></button>
+      </div>
+    </footer>
+    <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.2.27/angular.min.js"></script>
+    <script src="http://ajax.googleapis.com/ajax/libs/angularjs/1.2.25/angular-route.js"></script>
+    <script src="http://ajax.googleapis.com/ajax/libs/angularjs/1.2.13/angular-animate.js"></script>
+    <script src="https://cdn.firebase.com/js/client/2.0.5/firebase.js"></script>
+    <script src="http://cdnjs.cloudflare.com/ajax/libs/jquery/2.1.1/jquery.js"></script>
+    <script src="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.1/js/bootstrap.min.js"></script>
+    <script src='http://maps.googleapis.com/maps/api/js?sensor=false'></script>
+    <script src="http://cdnjs.cloudflare.com/ajax/libs/lodash.js/2.4.1/lodash.js"></script>
+    <script src="javascripts/angular-google-maps.js"></script>
+    <script src="javascripts/db.js"></script>
+    <script src="javascripts/views.js"></script>
+    <script src="javascripts/map.js"></script>
+  </body>
+</html>

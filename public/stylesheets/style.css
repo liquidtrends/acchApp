@@ -1,0 +1,61 @@
+html {
+  position: relative;
+  min-height: 100%;
+}
+body {
+   /*background: url('../images/edmonton.jpg');*/
+  /* background-size: cover;*/
+}
+
+.main-content {
+
+}
+
+.footer {
+  position: absolute;
+  bottom: 0;
+  width: 100%;
+  height: 50px;
+  padding-top: 10px;
+  background-color: grey;
+
+}
+
+/* Home Screen */
+
+.logo-text {
+   color: black;
+   font-family: 'Raleway', sans-serif;
+}
+
+.logo-text-thin {
+   font-weight: 200;
+}
+
+.btn-container {
+   margin-top: 20%;
+}
+
+.btn-main {
+   width: 100%;
+   margin-bottom: 1em;
+}
+
+/* Map Locations */
+
+.angular-google-map-container { 
+  height: 20em; 
+  margin-top: -1.4em;
+}
+
+.map-search {
+  height: 12.5em;
+  overflow: scroll;
+}
+
+.location-box {
+  border-bottom: 1px solid black;
+  padding: 0.5em;
+}
+
+/* Animations */

@@ -1,0 +1,25 @@
+<div id="map_canvas" ng-controller="mapController">
+   <ui-gmap-google-map center='map.center' zoom='map.zoom'>
+      <ui-gmap-markers  models="orgLocations" coords="'self'" icon="'icon'" show="false">
+      </ui-gmap-markers>
+   </ui-gmap-google-map>
+</div>
+Self Latitude: {{lat}} <br />
+Self Longitude: {{lng}} <br />
+   <div class="map-search">
+        <div class="span4 collapse-group">
+         <div ng-repeat="post in posts" class="location-box">
+          <h5>{{post.name}}</h5>
+           <p class="collapse text-center" id="{{post.$$hashKey}}">
+              {{post.address}}<br>
+              <a href="https://maps.googleapis.com/maps/api/directions/json?origin=Toronto&destination=Montreal&key=AIzaSyAx2J3r6C7crRawBuJRSIdslKwYhrPM63s"><button class="btn btn-info bt-sm"><i class="fa fa-location-arrow"></i> Directions</button></a>
+              <a href="{{post.phone_no}}"><button class="btn btn-info bt-sm"><i class="fa fa-phone"></i> Call</button></a>
+           </p>
+          <p><a class="btn" data-toggle="collapse" data-target="#{{post.$$hashKey}}">View details</a></p>
+          </div>
+        </div>
+      <!-- <ul class="list-group" ng-repeat="post in posts">
+        <li class="list-group-item">{{post.name}}</li>
+      </ul> -->
+   </div>
+</div>
