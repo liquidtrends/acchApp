@@ -3,8 +3,8 @@ html {
   min-height: 100%;
 }
 body {
-   /*background: url('../images/edmonton.jpg');*/
-  /* background-size: cover;*/
+  background: url('../images/edmonton.jpg');*/
+  background-size: cover;*/
 }
 
 .main-content {
@@ -24,7 +24,7 @@ body {
 /* Home Screen */
 
 .logo-text {
-   color: black;
+   color: white;
    font-family: 'Raleway', sans-serif;
 }
 
@@ -49,6 +49,7 @@ body {
 }
 
 .map-search {
+  background: white;
   height: 12.5em;
   overflow: scroll;
 }
@@ -57,5 +58,7 @@ body {
   border-bottom: 1px solid black;
   padding: 0.5em;
 }
+
+
 
 /* Animations */

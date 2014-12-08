@@ -17,6 +17,14 @@ acch.config(function($routeProvider) {
           templateUrl : 'list.html',
           controller  : 'listController'
       })
+      .when('/testing-location', {
+          templateUrl : 'testing-locations.html',
+          controller  : 'mapController'
+      })
+      .when('/directions', {
+          templateUrl : 'directions.html',
+          controller  : 'directionsController'
+      })
 });
 
 // create the controller and inject Angular's $scope
@@ -59,63 +67,97 @@ acch.controller('mapController', function($scope, $http) {
       error(function(data, status, headers, config) {
       // log error
     });
+  //end//
+});
 
-// Geolocation
-    $scope.lat = "0";
-        $scope.lng = "0";
-        $scope.accuracy = "0";
-        $scope.error = "";
-        // $scope.model = { myMap: undefined };
-        // $scope.myMarkers = [];
- 
-        $scope.showResult = function () {
-            return $scope.error == "";
-        }
- 
-        // $scope.mapOptions = {
-        //     center: new google.maps.LatLng($scope.lat, $scope.lng),
-        //     zoom: 15,
-        //     mapTypeId: google.maps.MapTypeId.ROADMAP
-        // };
- 
-        $scope.showPosition = function (position) {
-            $scope.lat = position.coords.latitude;
-            $scope.lng = position.coords.longitude;
-            $scope.accuracy = position.coords.accuracy;
-            $scope.$apply();
- 
-            // var latlng = new google.maps.LatLng($scope.lat, $scope.lng);
-            // $scope.model.myMap.setCenter(latlng);
-            // $scope.myMarkers.push(new google.maps.Marker({ map: $scope.model.myMap, position: latlng }));
-        }
- 
-        $scope.showError = function (error) {
-            switch (error.code) {
-                case error.PERMISSION_DENIED:
-                    $scope.error = "User denied the request for Geolocation."
-                    break;
-                case error.POSITION_UNAVAILABLE:
-                    $scope.error = "Location information is unavailable."
-                    break;
-                case error.TIMEOUT:
-                    $scope.error = "The request to get user location timed out."
-                    break;
-                case error.UNKNOWN_ERROR:
-                    $scope.error = "An unknown error occurred."
-                    break;
-            }
-            $scope.$apply();
-        }
- 
-        $scope.getLocation = function () {
-            if (navigator.geolocation) {
-                navigator.geolocation.getCurrentPosition($scope.showPosition, $scope.showError);
-            }
-            else {
-                $scope.error = "Geolocation is not supported by this browser.";
-            }
-        }
- 
-        $scope.getLocation();
+acch.controller('directionsController', function($scope, $http) {
 
+var geoComponent = function() {
+
+  var geolocateCallbackFunction = null;
+  var continuousReference = null;
+
+  function isSupported() {
+    if(window.navigator.geolocation) {
+      return true;
+    } else {
+      return false;
+    }
+  }
+
+  function geolocateSuccess(position) {
+    geolocateCallbackFunction(position);
+  }
+
+  // errors
+  function geolocateError(error) {
+    if (error.code === 1) {
+      // User denied access to their location.
+    }
+    else if (error.code === 2) {
+      // No position could be obtained.
+    }
+    else {
+      // Request for location timed out.
+    }
+  }
+
+  // return location
+  return {
+    geolocate: function(callback, maxAge, highAccuracy, continuous) {
+      geolocateCallbackFunction = callback;
+
+      if (maxAge === undefined) {
+        maxAge = 3600000;
+      }
+
+      if (highAccuracy === undefined) {
+        highAccuracy = false;
+      }
+
+      if (isSupported()) {
+        if ((continuous !== undefined) && continuous) {
+          continuousReference = navigator.geolocation.watchPosition(
+            geolocateSuccess, geolocateError, {maximumAge: maxAge, 
+            enableHighAccuracy: highAccuracy});
+        }
+        else {
+          navigator.geolocation.getCurrentPosition(geolocateSuccess,
+            geolocateError, {maximumAge: maxAge, enableHighAccuracy: highAccuracy});
+        }
+      }
+    },
+  };
+}();
+
+geoComponent.geolocate(function(data){
+    var lat = data.coords.latitude;
+    var lng = data.coords.longitude;
+}, 10000, true);
+
+
+  //Directions
+
+  var directionsService = new google.maps.DirectionsService();
+  var directionsDisplay = new google.maps.DirectionsRenderer();
+
+  var directionsMap = new google.maps.Map(document.getElementById('map-directions'), {
+     zoom:7,
+     mapTypeId: google.maps.MapTypeId.ROADMAP
+  });
+
+   directionsDisplay.setMap(directionsMap);
+   directionsDisplay.setPanel(document.getElementById('panel'));
+
+  var request = {
+     origin: '116 St and 85 Ave, Edmonton, AB T6G 2R3, Canada', 
+     destination: '12325 140 Street NW, Edmonton, AB',
+     travelMode: google.maps.DirectionsTravelMode.DRIVING
+  };
+
+   directionsService.route(request, function(response, status) {
+     if (status == google.maps.DirectionsStatus.OK) {
+       directionsDisplay.setDirections(response);
+     }
+  });
 });
