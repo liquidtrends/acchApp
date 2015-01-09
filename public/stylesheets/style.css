@@ -48,17 +48,20 @@ body {
   margin-top: -1.4em;
 }
 
+#map-directions {
+  margin-top: -1.4em;
+}
+
 .map-search {
   background: white;
-  height: 12.5em;
+  height: 13.4em;
   overflow: scroll;
+  margin-bottom: 2em;
 }
 
 .location-box {
   border-bottom: 1px solid black;
   padding: 0.5em;
 }
-
-
 
 /* Animations */
